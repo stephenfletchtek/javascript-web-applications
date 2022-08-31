@@ -13,7 +13,7 @@ class NotesView {
 
   displayNotes() {
     this.model.list.forEach((note) => {
-      let divEl = document.createElement('div');
+      const divEl = document.createElement('div');
       divEl.textContent = note;
       divEl.className = "note";
       this.mainContainerEl.append(divEl);

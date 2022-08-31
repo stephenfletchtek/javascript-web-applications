@@ -6,8 +6,6 @@ const fs = require('fs');
 const NotesView = require('./notesView');
 const Model = require('./notesModel');
 
-
-
 describe('NotesView class', () => {
   beforeEach(() => {
     document.body.innerHTML = fs.readFileSync('./index.html')
