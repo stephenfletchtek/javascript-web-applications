@@ -27,8 +27,31 @@ describe('NotesView class', () => {
     const buttonEl = document.querySelector('#add-note');
 
     inputEl.value = 'Will this work?';
+    const check = inputEl.value
     buttonEl.click();
-    expect(document.querySelector('div.note').textContent).toBe(inputEl.value);
+    expect(document.querySelector('div.note').textContent).toBe(check);
   });
+
+  it('only displays notes once', () => {
+    const model = new Model;
+    const notesView = new NotesView(model);
+
+    model.addNote('Buy milk');
+    notesView.displayNotes();
+    notesView.displayNotes();
+    expect(document.querySelectorAll('div.note').length).toBe(1);
+  });
+
+  it('clears the input box when Add Note is clicked', () => {
+    const model = new Model;
+    const notesView = new NotesView(model);
+    const inputEl = document.querySelector('#input-note');
+    const buttonEl = document.querySelector('#add-note');
+
+    inputEl.value = 'Will this work?';
+    buttonEl.click();
+    expect(inputEl.value).toBe("")
+  })
+
 })
 
