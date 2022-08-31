@@ -12,4 +12,11 @@ describe('NotesModel class', () => {
     expect(model.getNotes()).toEqual(['Buy milk']);
   })
 
+  it('It adds milk and go to the gym', () => {
+    const model = new NotesModel;
+    model.addNote('Buy milk');
+    model.addNote('Go to the gym');
+    expect(model.getNotes()).toEqual(['Buy milk', 'Go to the gym']);
+  })
+
 })
