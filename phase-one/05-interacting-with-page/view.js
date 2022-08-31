@@ -13,7 +13,7 @@ class View {
 
   clearParagraphs() {
     // another way of getting chilren of this.mainContainerEl
-    // const paragraphs = Array.from(this.mainContainerEl.children)
+    // const allChildren = Array.from(this.mainContainerEl.children)
 
     const paragraphs = document.querySelectorAll('p')
     paragraphs.forEach((element) => {
