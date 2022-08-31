@@ -18,9 +18,19 @@ describe('NotesView class', () => {
     model.addNote('Buy milk');
     model.addNote('Go to the gym');
     const notesView = new NotesView(model);
-    notesView.displayNotes()
+    notesView.displayNotes();
     expect(document.querySelectorAll('div.note').length).toBe(2);
+  });
 
-  })
+  it('enter a note and click', () => {
+    const model = new Model;
+    const notesView = new NotesView(model);
+    const inputEl = document.querySelector('#input-note');
+    const buttonEl = document.querySelector('#add-note');
+
+    inputEl.value = 'Will this work?';
+    buttonEl.click();
+    expect(document.querySelector('div.note').textContent).toBe(inputEl.value);
+  });
 })
 
