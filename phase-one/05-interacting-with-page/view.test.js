@@ -21,5 +21,10 @@ describe('Page view', () => {
     expect(document.querySelectorAll('p').length).toBe(3);
   });
 
+  it('clears paragraphs', () => {
+    const view = new View();
+    view.clearParagraphs()
+    expect(document.querySelectorAll('p').length).toBe(0);
+  });
 
 });
