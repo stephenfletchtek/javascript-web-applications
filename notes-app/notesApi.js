@@ -1,8 +1,9 @@
 class NotesApi {
 
-
   loadNotes(callback) {
-    console.log('blue')
+    fetch('http://localhost:3000/notes')
+      .then(response => response.json())
+      .then(callback)
   }
 }
 
