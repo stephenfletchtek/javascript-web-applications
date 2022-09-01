@@ -17,6 +17,7 @@ class GithubView {
   display(repoData) {
     document.querySelector('#repo-name').textContent = repoData.full_name
     document.querySelector('#repo-description').textContent = repoData.description
+    document.querySelector('#repo-avatar').src = repoData.organization.avatar_url
   }
 }
 
