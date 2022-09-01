@@ -53,5 +53,15 @@ describe('NotesView class', () => {
     expect(inputEl.value).toBe("")
   })
 
+  it('displays notes from api', () => {
+    const model = new Model;
+    const mockApi = { loadNotes: (callback) => callback(['note one', 'note two']) }
+    const notesView = new NotesView(model, mockApi);
+    notesView.displayNotesFromApi();
+    const results = document.querySelectorAll('div.note');
+    expect(results.length).toBe(2);
+    expect(results[0].textContent).toBe('note one')
+    expect(results[1].textContent).toBe('note two')
+  })
 })
 
