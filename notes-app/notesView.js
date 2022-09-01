@@ -8,7 +8,9 @@ class NotesView {
 
     this.buttonEl.addEventListener('click', () => {
       this.model.addNote(this.note.value);
+      const forApi = this.note.value
       this.note.value = "";
+      this.api.createNote(forApi)
       this.displayNotes();
     });
   }

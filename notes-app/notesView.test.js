@@ -22,7 +22,8 @@ describe('NotesView class', () => {
 
   it('enter a note and click', () => {
     const model = new Model;
-    const notesView = new NotesView(model);
+    const mockApi = { createNote: jest.fn(), loadNotes: (callback) => callback(['note']) }
+    const notesView = new NotesView(model, mockApi);
     const inputEl = document.querySelector('#input-note');
     const buttonEl = document.querySelector('#add-note');
 
@@ -44,7 +45,9 @@ describe('NotesView class', () => {
 
   it('clears the input box when Add Note is clicked', () => {
     const model = new Model;
-    const notesView = new NotesView(model);
+    const mockApi = { createNote: jest.fn(), loadNotes: (callback) => callback(['note']) }
+
+    const notesView = new NotesView(model, mockApi);
     const inputEl = document.querySelector('#input-note');
     const buttonEl = document.querySelector('#add-note');
 
@@ -62,6 +65,21 @@ describe('NotesView class', () => {
     expect(results.length).toBe(2);
     expect(results[0].textContent).toBe('note one')
     expect(results[1].textContent).toBe('note two')
+  })
+
+  it('posts a note to the api', () => {
+    const model = new Model;
+    const mockApi = { createNote: jest.fn(), loadNotes: (callback) => callback(['note']) }
+    const notesView = new NotesView(model, mockApi);
+    const inputEl = document.querySelector('#input-note');
+    const buttonEl = document.querySelector('#add-note');
+    inputEl.value = 'note';
+    buttonEl.click();
+    expect(mockApi.createNote).toHaveBeenCalledWith('note')
+    notesView.displayNotesFromApi();
+    const results = document.querySelectorAll('div.note');
+    expect(results.length).toBe(1);
+    expect(results[0].textContent).toBe('note')
   })
 })
 

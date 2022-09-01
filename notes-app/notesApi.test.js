@@ -10,4 +10,14 @@ describe('NotesApi class', () => {
       expect(returnedNotesFromApi).toEqual(['First note', 'Second note']);
     });
   })
+
+  it('creates a note', () => {
+    const notesApi = new NotesApi();
+    expect.assertions(1);
+    fetch.mockResponseOnce(JSON.stringify(['Note1']))
+    notesApi.createNote("Note1")
+    fetch.mockResponseOnce(JSON.stringify(['Note1', 'Note2']))
+    notesApi.createNote("Note2", (response) => expect(response).toEqual(['Note1', 'Note2']))
+  });
+
 })
