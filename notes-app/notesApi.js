@@ -5,7 +5,7 @@ class NotesApi {
       .then(callback)
   }
 
-  createNote(note, callback) {
+  createNote(note, callback = console.log) {
     fetch('http://localhost:3000/notes', {
       method: 'POST',
       headers: {
@@ -15,8 +15,11 @@ class NotesApi {
     })
       .then(response => response.json())
       .then(data => {
-        if (typeof callback === "function") callback(data)
+        callback(data)
       })
+    // .then(data => {
+    //   if (typeof callback === "function") callback(data)
+    // })
   }
 }
 module.exports = NotesApi;
