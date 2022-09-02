@@ -29,19 +29,17 @@ describe('NotesApi class', () => {
   });
 
   it('catches a failed loadNotes', () => {
-    expect.assertions(1);
-    // fetch.mockResponseOnce(JSON.stringify([{ content: 'First note' }, { content: 'Second note' }]))
+    expect.assertions(2)
+    let mocks = [fetch.mockResponseOnce(JSON.stringify('any old rubbish to stringify'))]
+    mocks.push(fetch.mockReject(new TypeError))
 
-    // fetch.mockResponseOnce(JSON.stringify("this is a test")) // THIS RETURNS THEN
-    // fetch.mockResponseOnce({ ok: false }) // THIS RETURNS CATCH
-    fetch.mockReject(new TypeError)
-    // try {
-    //   expect(1 + 2).toBe(4)
-    // }
-    // catch {
-    //   expect(2 + 3).toBe(5)
-    // }
-    notesApi.loadNotes((data) => expect(false).toBe(true), (otherData) => expect(1 + 2).toBeTruthy())
+    mocks.forEach(() => {
+      notesApi.loadNotes(
+        (validData) => {
+          expect(validData).toEqual('any old rubbish to stringify');
+        }, (invalidData) => {
+          expect(invalidData.name).toBe('TypeError')
+        })
+    })
   });
 })
-

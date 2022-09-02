@@ -28,17 +28,13 @@ class NotesView {
     });
   }
 
-  setnDisplay(notes) {
-    this.model.setNotes(notes);
-    this.displayNotes();
-  }
-
   displayNotesFromApi() {
-    this.api.loadNotes((data) => this.setnDisplay(data))
-    // this.api.loadNotes((notes) => {
-    //   this.model.setNotes(notes)
-    //   this.displayNotes()
-    // })
+    this.api.loadNotes((notes) => {
+      this.model.setNotes(notes);
+      this.displayNotes();
+    }, () => {
+      this.displayError();
+    });
   }
 
   displayError() {
