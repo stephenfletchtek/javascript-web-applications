@@ -20,11 +20,12 @@ class NotesApi {
       })
   }
 
-  deleteAll() {
-    console.log('here')
+  deleteAll(callback = () => { }) {
     fetch('http://localhost:3000/notes', {
       method: 'DELETE'
-    });
+    })
+      .then(response => response.json())
+      .then((data) => callback(data));
   }
 }
 module.exports = NotesApi;

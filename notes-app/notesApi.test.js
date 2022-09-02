@@ -17,7 +17,6 @@ describe('NotesApi class', () => {
   })
 
   it('creates a note', () => {
-    // const notesApi = new NotesApi();
     expect.assertions(2);
     fetch.mockResponseOnce(JSON.stringify('any old rubbish to stringify'));
     notesApi.createNote('Note1');
@@ -42,4 +41,11 @@ describe('NotesApi class', () => {
         })
     })
   });
+
+  it('deletes all notes', () => {
+    fetch.mockResponseOnce(JSON.stringify([]));
+    notesApi.deleteAll((response) => {
+      expect(response).toEqual([]);
+    });
+  })
 })
