@@ -4,6 +4,7 @@ class NotesView {
     this.model = model;
     this.note = document.querySelector('#input-note');
     this.buttonEl = document.querySelector('#add-note');
+    this.deleteEl = document.querySelector('#delete-all');
     this.mainContainerEl = document.querySelector('#main-container');
 
     this.buttonEl.addEventListener('click', () => {
@@ -12,6 +13,12 @@ class NotesView {
       this.note.value = "";
       this.displayNotes();
     });
+
+    this.deleteEl.addEventListener('click', () => {
+      this.model.reset();
+      this.api.deleteAll();
+      this.displayNotes();
+    })
   }
 
   displayNotes() {
