@@ -28,17 +28,24 @@ class NotesView {
     });
   }
 
-  setnDisplay = (notes) => {
+  setnDisplay(notes) {
     this.model.setNotes(notes);
     this.displayNotes();
   }
 
   displayNotesFromApi() {
-    this.api.loadNotes(this.setnDisplay)
+    this.api.loadNotes((data) => this.setnDisplay(data))
     // this.api.loadNotes((notes) => {
     //   this.model.setNotes(notes)
     //   this.displayNotes()
     // })
+  }
+
+  displayError() {
+    const errorDivEl = document.createElement('div');
+    errorDivEl.className = 'error-message';
+    errorDivEl.textContent = 'Oops, something went wrong!';
+    this.mainContainerEl.append(errorDivEl);
   }
 }
 

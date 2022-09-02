@@ -81,5 +81,14 @@ describe('NotesView class', () => {
     expect(results.length).toBe(1);
     expect(results[0].textContent).toBe('note')
   })
+
+  it('writes an error', () => {
+    const model = new Model;
+    const mockApi = { createNote: jest.fn(), loadNotes: (callback) => callback(['note']) }
+    const notesView = new NotesView(model, mockApi);
+    notesView.displayError()
+    expect(document.querySelector('div.error-message').textContent).toBe('Oops, something went wrong!')
+  })
+
 })
 
