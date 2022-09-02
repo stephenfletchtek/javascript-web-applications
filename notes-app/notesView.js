@@ -8,9 +8,8 @@ class NotesView {
 
     this.buttonEl.addEventListener('click', () => {
       this.model.addNote(this.note.value);
-      const forApi = this.note.value
+      this.api.createNote(this.note.value)
       this.note.value = "";
-      this.api.createNote(forApi)
       this.displayNotes();
     });
   }
@@ -21,7 +20,7 @@ class NotesView {
       note.remove();
     });
 
-    this.model.list.forEach((note) => {
+    this.model.getNotes().forEach((note) => {
       const divEl = document.createElement('div');
       divEl.textContent = note;
       divEl.className = "note";
@@ -29,11 +28,17 @@ class NotesView {
     });
   }
 
+  setnDisplay = (notes) => {
+    this.model.setNotes(notes);
+    this.displayNotes();
+  }
+
   displayNotesFromApi() {
-    this.api.loadNotes((notes) => {
-      this.model.setNotes(notes)
-      this.displayNotes()
-    })
+    this.api.loadNotes(this.setnDisplay)
+    // this.api.loadNotes((notes) => {
+    //   this.model.setNotes(notes)
+    //   this.displayNotes()
+    // })
   }
 }
 
